@@ -1,0 +1,63 @@
+#!/bin/python
+import os
+from time import sleep
+
+dir = str(input("Enter the directory path that you want to the zip its files (leave plank if you want to zip this directory): "))
+original = str(input("Do you want to keep the original files and folders ? (y for yes n for no ):"))
+logs= """
+--------------------------------------------------------------------------
+ ||The progress is being written to nohup.out file take a look at it . ||
+ ||Don't close the program and don't hit ctr + c but you can background||
+ ||  it if you want .                                                  ||                       
+--------------------------------------------------------------------------
+"""
+
+Done= """
+--------------------------------------------------------------------------
+ || Done  ||
+--------------------------------------------------------------------------
+"""
+
+
+if(original == "y " or original == "Y" ):
+    original = False
+else:
+    original = True
+
+def base_case(dir):
+
+    if dir == "" :
+        dir = "."
+    dir_files = os.listdir(dir)
+    print(logs)
+    sleep(2)
+    for folder in dir_files:     
+        os.system("cd "+dir + " && " + "nohup zip -r " + "'" + folder + "'"+ ".zip" + " " + "'" + folder + "'"  + " && rm -rf  " + "'"+folder+"'")
+    print(Done)
+
+
+def keep_originals(dir):
+
+    if dir == "" :
+        dir = "."
+    dir_files = os.listdir(dir)
+    print(logs)
+    sleep(2)
+    for folder in dir_files:     
+        os.system("cd "+dir + " && " + "nohup zip -r " + "'" + folder + "'"+ ".zip" + " " + "'" + folder + "' " )
+    print(Done)
+
+    
+if(original):
+    keep_originals(dir)    
+else:
+     base_case(dir)
+
+
+
+# todo :-
+
+
+# base_case zipall
+# -dirs zip only directories
+

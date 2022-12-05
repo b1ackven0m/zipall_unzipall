@@ -1,0 +1,30 @@
+#!/bin/python
+import os
+
+dir = str(input("Enter the directory path that you want to the unzip its files (leave plank if you want to unzip this directory): "))
+logs= """
+--------------------------------------------------------------------------
+ ||The progress is being written to nohup.out file take a look at it . ||
+ ||Don't close the program and don't hit ctr + c but you can background||
+ ||  it if you want .                                                  ||                       
+--------------------------------------------------------------------------
+"""
+Done= """
+--------------------------------------------------------------------------
+ || Done  ||
+--------------------------------------------------------------------------
+"""
+
+
+def unzip(dir):
+
+    if dir == "" :
+        dir = "."
+    dir_files = os.listdir(dir)
+    print(logs)
+    for folder in dir_files:     
+        os.system("cd "+dir + " && " + "nohup  unzip " + "'" + folder + "'"+" && rm -rf  " + "'"+folder+"'")
+    print(Done)
+
+
+unzip(dir)
